@@ -1,0 +1,22 @@
+(include "./components/workspaces/workspaces.yuck")
+
+(defwidget center-side []
+  (box
+    :class "center-side"
+    :orientation "h"
+    :halign "center"
+    :space-evenly false
+    (workspaces)
+  )
+)
+
+; (defwidget alsa-widget []
+    ; (eventbox
+    ;   :onhover "notify-send 'hi'"
+    ;   (box
+    ;     (button :icon "system-shutdown" :icon-size "24"
+    ;       (label :text "whatup")
+    ;     )
+    ;   )
+    ; )
+; )

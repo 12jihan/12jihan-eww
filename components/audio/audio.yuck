@@ -1,0 +1,138 @@
+(defpoll volume 
+  :interval "1ms"
+  :initial "0"
+  "pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1 | tr -d '%' || echo 0"
+)
+
+(defpoll is_muted 
+  :interval "1ms"
+  :initial "no"
+  "pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}' || echo no"
+)
+
+(defpoll get_sinks
+  :interval "1ms"
+  "~/.config/eww/scripts/get_all_sinks.sh"
+)
+
+(defpoll cur_sink
+  :interval "1s"
+  "~/.config/eww/scripts/get_all_sinks.sh | jq -r '.[] | select(.default == true) | .description'"
+)
+
+(defwidget audio-ctrl-btn[]
+  (box 
+    :class "mute-btn-container"
+    :orientation "horizontal"
+    :space-evenly true
+    :tooltip "Hey"
+    (button 
+      :class "volume-btn"
+      :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+      :onrightclick "eww open --toggle audio-settings"
+      (label 
+        :text {
+          is_muted == "yes" ? "" : ""
+        }
+      )
+    )
+  )
+)
+
+(defwindow audio-settings
+  :monitor 1
+  :geometry (geometry
+    :x "430px"
+    :y "5px"
+    :width "390px"
+    :height "250px"
+    :anchor "right top"
+  )
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (eventbox
+    :onhoverlost "eww open --toggle audio-settings & ${EWW_CMD} update sink_dropdown_state=${false}"
+    (box
+      :class "audio-settings"
+      :orientation "h"
+      (audio-ctrls)
+    )
+  )
+)
+
+(defwidget audio-ctrls []
+  (box
+    :class "audio-ctrl-hub"
+    :orientation "v"
+    :valign "start"
+    :space-evenly false
+    (label :class "sound" :text "Sound" :halign "start")
+    (audio-slider)
+    (label :class "output" :text "Output" :halign "start")
+    (sink-selector)
+  )
+)
+
+(defwidget audio-slider []
+  (box
+    :class "vol-slider"
+    :orientation "v"
+    :valign "start"
+    :width 100
+    :space-evenly false
+
+    (scale 
+      :class "volume-slider"
+      :min 0
+      :max 100
+      :value volume
+      :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+    )
+  )
+)
+
+; Sink dropdown state and Sink widget
+(defvar sink_dropdown_state false)
+(defwidget sink-selector []
+  (box 
+    :class "sink-selector"
+    :orientation "v"
+    :space-evenly false
+    (button 
+      :onclick "${EWW_CMD} update sink_dropdown_state=${!sink_dropdown_state}"
+      (box
+        (label
+          :text "${cur_sink}"
+          :halign "start"
+        )
+        (label
+          :text " ${sink_dropdown_state? '' : ''}"
+          :halign "end"
+        )
+      )
+    )
+    (eventbox
+      (revealer
+        :transition "slidedown"
+        :reveal sink_dropdown_state
+        :duration "250ms"
+        (box
+          :class "sink-options"
+          :orientation "v"
+          (for sink in get_sinks 
+            (button
+              :class "sink-selection"
+              :visible {sink.description != cur_sink}
+              :onclick "~/.config/eww/scripts/get_all_sinks.sh ${sink.name} & ${EWW_CMD} update sink_dropdown_state=${false}"
+              (label :text "${sink.description}"
+                :halign "start"
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+

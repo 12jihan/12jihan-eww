@@ -1,0 +1,37 @@
+(include "./side-left/left-side.yuck")
+(include "./side-center/center-side.yuck")
+(include "./side-right/right-side.yuck")
+
+(defwidget bar []
+  (box 
+    :class "bar-container"
+    :orientation "h"
+    ; :halign "center"
+    (left-side)
+    (center-side)
+    (right-side)
+  )
+)
+
+(defwindow bar
+  :monitor 1
+  :stacking "bg"
+  :windowtype "dock"
+  :wm-ignore false
+  :exclusive true
+  :geometry
+  (geometry
+    :x "0%"
+    :y "0%"
+    :width "75%"
+    :height "16px"
+    :anchor "top center"
+  )
+  :reserve
+  (struts
+    :side "top"  
+    :distance "4%"
+  )
+  (bar)
+)
+

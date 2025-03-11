@@ -1,0 +1,16 @@
+.workspaces {
+  padding-top: 0.1rem;
+
+  button {
+    color: #333;
+    box-shadow: none;
+    min-width: 2rem;
+    border-radius: 15px;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      color: white;
+      background: #333;
+    }
+  }
+}

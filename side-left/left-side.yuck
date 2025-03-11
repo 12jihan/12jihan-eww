@@ -1,0 +1,15 @@
+(include "./components/colorpicker/colorpicker.yuck")
+
+(defwidget left-side []
+  (box
+    :class "left-side"
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    :spacing 10
+    (button :onclick "" "Test")
+    (button :onclick "" "Test")
+    (button :onclick "" "Test")
+    (button :onclick "" "Test")
+  )
+)

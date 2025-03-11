@@ -1,0 +1,31 @@
+@import './side-left/left-side.scss';
+@import './side-center/center-side.scss';
+@import './side-right/right-side.scss';
+
+* {
+  all: unset;
+  font-family: "Font Awesome", "Nerd Font";
+  font-size: 16px;
+}
+
+.bar {
+  background: transparent;
+  min-height: 30px;
+}
+
+tooltip {
+  color: white;
+  background: red;
+  padding: 10px;
+}
+
+tooltip::before {
+  content: " ";
+  color: white;
+  background: red;
+  padding: 10px;
+}
+
+tooltip label {
+  padding: 10px;
+}

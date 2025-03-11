@@ -1,0 +1,16 @@
+;-------- Time and Date --------
+(defpoll time_poll :interval "1s" "date +%H:%M:%S")
+(defpoll date_poll :interval "1m" "date +%d/%m/%Y")
+(defwidget date-time-widget []
+  (box 
+    :class "date-time"
+    :space-evenly false
+    :halign "end"
+    :spacing 10
+    (label 
+      :class "date-time-text" 
+      :text "${date_poll + ' ' + time_poll}"
+    )
+  )
+)
+

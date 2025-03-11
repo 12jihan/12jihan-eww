@@ -1,0 +1,64 @@
+.audio-settings {
+  color: #333;
+  background: rgba($color: #FFFFFF, $alpha: 0.580);
+  padding: 10px;
+  border-radius: 10px 0 10px 10px;
+}
+
+.sound {
+  color: rgba(#555, 0.99);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.output {
+  color: rgba(#555, 0.99);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.vol-slider {
+  padding-bottom: 15px;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(#999, 0.540);
+
+  scale trough {
+    all: unset;
+    border: 1px solid #333;
+    border-radius: 12px 12px;
+    background-color: #333;
+
+    highlight {
+      all: unset;
+      min-height: 20px;
+      border-radius: 10px;
+      background-color: white;
+    }
+
+    slider {
+      all: unset;
+      min-height: 20px;
+      border-radius: 50%;
+    }
+
+  }
+}
+
+.sink-options {
+  margin: 5px;
+
+  button {
+    color: #333;
+    background-color: yellow;
+    padding: 5px;
+    min-width: 100px;
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+
+}

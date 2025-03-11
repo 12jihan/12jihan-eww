@@ -1,0 +1,14 @@
+(defwidget workspaces []
+  (box 
+    :class "workspaces"
+    :orientation "h"
+    :space-evenly false
+    :spacing 5
+    :halign "start"
+    (button :onclick "" "")
+    (button :onclick "" "")
+    (button :onclick "" "")
+    (button :onclick "" "")
+    (button :onclick "" "")
+  )
+)
