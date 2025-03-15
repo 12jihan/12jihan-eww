@@ -6,21 +6,23 @@
   all: unset;
   font-family: "Font Awesome", "Nerd Font";
   font-size: 16px;
+  -gtk-icon-shadow: none;
+  -gtk-icon-style: requested;
 }
 
-.bar {
+.icon {
+  font-family: "Font Awesome", "Nerd Font";
+  font-size: 1rem;
+  -gtk-icon-shadow: none;
+  -gtk-icon-style: requested;
+}
+
+bar {
   background: transparent;
-  min-height: 30px;
+  min-height: 20px;
 }
 
 tooltip {
-  color: white;
-  background: red;
-  padding: 10px;
-}
-
-tooltip::before {
-  content: " ";
   color: white;
   background: red;
   padding: 10px;

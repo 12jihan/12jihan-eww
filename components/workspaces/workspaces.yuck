@@ -1,3 +1,17 @@
+(defvar display "DP-1")
+
+(defpoll active-ws 
+  :interval "500ms"
+  :initial "1"
+  "hyprctl activeworkspace -j | jq '.id'"
+)
+
+(defpoll workspaces 
+  :interval "60s" 
+  :initial "[]"
+  "hyprctl workspaces -j | jq"
+)
+
 (defwidget workspaces []
   (box 
     :class "workspaces"
@@ -5,10 +19,16 @@
     :space-evenly false
     :spacing 5
     :halign "start"
-    (button :onclick "" "")
-    (button :onclick "" "")
-    (button :onclick "" "")
-    (button :onclick "" "")
-    (button :onclick "" "")
+    (button :onclick "hyprctl dispatch workspace special" "")
+    ;; This label is to make sure the value update the way it needs to
+    (label :text "${active-ws}" :visible false)
+    (for ws in workspaces
+      (button
+        :class "workspace-btn"
+        :onclick "hyprctl dispatch workspace ${ws.id} "
+        :visible "${ws.monitor == display}"
+        (label :text "${active-ws == ws.id ? '' : ''}")
+      )
+    )
   )
 )

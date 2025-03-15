@@ -38,7 +38,6 @@
   (box
     :class "power-btn"
     :space-evenly false
-    :width 30
     (button
       :onclick "eww open --toggle power-options-window"
       (label :text "")

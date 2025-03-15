@@ -25,7 +25,6 @@
     :class "mute-btn-container"
     :orientation "horizontal"
     :space-evenly true
-    :tooltip "Hey"
     (button 
       :class "volume-btn"
       :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"

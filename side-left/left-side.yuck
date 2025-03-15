@@ -1,5 +1,50 @@
 (include "./components/colorpicker/colorpicker.yuck")
 
+(defpoll active_window
+  :interval "500ms"
+  :initial "[]"
+  "~/.config/eww/scripts/active_window.sh title"
+)
+(defvar launch_apps
+  '[
+    {
+      "app": "chrome",
+      "cmd": "nohup google-chrome-stable </dev/null &>/dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "firefox",
+      "cmd": "nohup firefox </dev/null &>/dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "obs",
+      "cmd": "nohup obs </dev/null &>/dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "ghostty",
+      "cmd": "nohup ghostty </dev/null &>/dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "obsidian",
+      "cmd": "nohup obsidian </dev/null &> /dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "nemo",
+      "cmd": "nohup nemo </dev/null &> /dev/null &",
+      "icon": ""
+    },
+    {
+      "app": "cider",
+      "cmd": "nohup cider </dev/null &> /dev/null &",
+      "icon": ""
+    }
+  ]'
+)
+
 (defwidget left-side []
   (box
     :class "left-side"
@@ -7,9 +52,18 @@
     :halign "start"
     :space-evenly false
     :spacing 10
-    (button :onclick "" "Test")
-    (button :onclick "" "Test")
-    (button :onclick "" "Test")
-    (button :onclick "" "Test")
+    (for app in launch_apps
+      (button
+        :class "workspace-btn"
+        :onclick "${app.cmd}" 
+        (label :text "${app.icon}")
+      )
+    )
+    (label :text "")
+    (button
+      :class "workspace-btn"
+      :onclick "echo ${active_window}" 
+      (label :text "${active_window}")
+    )
   )
 )
