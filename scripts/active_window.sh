@@ -1,4 +1,4 @@
-#!/bin/env zsh
+#!/usr/bin/env zsh
 
 # Get active window information
 window_info=$(hyprctl activewindow -j)

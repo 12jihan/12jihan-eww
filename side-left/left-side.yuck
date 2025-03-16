@@ -54,14 +54,14 @@
     :spacing 10
     (for app in launch_apps
       (button
-        :class "workspace-btn"
+        :class "app-launcher-btn"
         :onclick "${app.cmd}" 
         (label :text "${app.icon}")
       )
     )
     (label :text "")
     (button
-      :class "workspace-btn"
+      :class "active-window-btn"
       :onclick "echo ${active_window}" 
       (label :text "${active_window}")
     )

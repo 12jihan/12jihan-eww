@@ -23,7 +23,7 @@
   (geometry
     :x "0%"
     :y "0%"
-    :width "75%"
+    :width "98%"
     :height "16px"
     :anchor "top center"
   )

@@ -1,14 +1,43 @@
+(include "./components/comp-info-widget/comp-info-widget.yuck")
 (include "./components/audio/audio.yuck")
 (include "./components/power-widget/power-widget.yuck")
 (include "./components/date-time/date-time.yuck")
 
+(defpoll gpu_temp
+  :initial 0
+  :interval "1s"
+  "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits"
+)
+
+
 (defwidget right-side []
   (box
     :class "right-side"
-    :orientation "horizontal"
+    :orientation "h"
     :halign "end"
+    :valign "center"
     :space-evenly false
     :spacing 10
+    ; (box
+    ;   (graph
+    ;     :class "comp-widget-graph"
+    ;     :value gpu_temp
+    ;     :max "100"
+    ;     :thickness "4"
+    ;     :width "150"
+    ;     :dynamic true
+    ;     :time-range "1s"
+    ;     ; :flip-x true
+    ;     ; :flip-y true
+    ;     ; :vertical true
+    ;     :line-style "round"
+    ;   )
+    ; )
+    (label :text {gpu_temp + 'C'})
+    (button 
+      :onclick "eww open --toggle comp-info"
+      (label :text {network-usage})
+    )
     (audio-ctrl-btn)
     (date-time-widget)
     (power-options-widget)
