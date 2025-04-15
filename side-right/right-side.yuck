@@ -33,9 +33,10 @@
     ;     :line-style "round"
     ;   )
     ; )
-    (label :text {gpu_temp + 'C'})
+    (label :text {gpu_temp + ' °C'})
     (button 
       :onclick "eww open --toggle comp-info"
+      :width 180
       (label :text {network-usage})
     )
     (audio-ctrl-btn)

@@ -10,7 +10,6 @@
   :geometry (geometry
     :x "430px"
     :y "5px"
-    :style "{background: black}"
     :width "390px"
     :height "250px"
     :anchor "right top"
